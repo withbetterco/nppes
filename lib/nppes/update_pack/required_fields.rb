@@ -2,6 +2,15 @@ module Nppes
   module UpdatePack
     class RequiredFields
       class_attribute :fields
+      class_attribute :provider_fields
+      class_attribute :provider_details
+      class_attribute :provider_official_zip
+
+      class_attribute :organization_fields
+      class_attribute :organization_relations
+      class_attribute :organization_official_zip
+
+
       class_attribute :relations
       class_attribute :code_values
 
@@ -40,6 +49,51 @@ module Nppes
           suffix: 9,
           last_update_date: 37,
           gender_code: 41,
+      }
+
+      self.provider_fields = {
+          last_name: [5, 42],
+          first_name: [6, 43],
+          middle_name: [7, 44],
+          gender: 41,
+          phone: [34, 46],
+      }
+
+      self.provider_details = {
+          prefix: 8,
+      }
+
+      self.provider_official_zip = {
+          zip: 32,
+      }
+
+      self.organization_official_zip = {
+          zip: 32,
+      }
+
+      self.organization_fields = {
+          name: [4],
+          phone: [34, 46],
+          address: 28,
+          city: 30,
+          state: 31,
+          abbreviated_state: 31,
+      }
+
+      self.organization_relations = {
+        locations:
+          [
+            {
+                name: 'official',
+                address: 28,
+                zip: 32
+            },
+            {
+                name: 'mailing',
+                address: 20,
+                zip: 24
+            }
+          ]
       }
 
       self.relations = {

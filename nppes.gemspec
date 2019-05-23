@@ -21,9 +21,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency('rails', '>= 3.0.0')
   gem.add_dependency('rubyzip')
   gem.add_dependency('nokogiri')
-  gem.add_dependency('delayed_job_active_record')
+  #gem.add_dependency('delayed_job_active_record')
   gem.add_dependency('daemons')
 
   gem.add_development_dependency('rspec-rails')
 end
-

@@ -1,6 +1,7 @@
-require 'delayed_job'
+#require 'delayed_job'
 require 'nppes/models'
 require 'nppes/jobs'
+require 'nppes/workers'
 require 'nppes/update_pack'
 require 'nppes/railtie' if defined?(Rails)
 

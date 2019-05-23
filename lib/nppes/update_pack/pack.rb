@@ -10,10 +10,11 @@ module Nppes
           Nppes.logger.warn 'proceed file'
           zip = Zip::File.open(zip_file)
 
-          data = zip.entries.detect {|entry| entry.name =~ /npidata_\d+-\d+\.csv/}
+          data = zip.entries.detect {|entry| entry.name =~ /npidata_pfile_\d+-\d+\.csv/}
+          #data = zip.entries.detect {|entry| entry.name =~ /npidata_\d+-\d+\.csv/}
           #head = zip.entries.detect {|entry| entry.name =~ /npidata_\d+-\d+FileHeader\.csv/}
 
-          raise Exception.new('head or data not found') unless data || head
+          raise Exception.new('head or data not found') unless data #|| head
 
           #header = UpdatePack::Header.new(head.get_input_stream)
 
@@ -35,7 +36,7 @@ module Nppes
         end
 
         def background_init_base
-          Delayed::Job.enqueue(Nppes::Jobs::IniterJob.new)
+          Nppes::Workers::IniterWorker.perform_async
         end
 
         def init_base
@@ -45,7 +46,9 @@ module Nppes
             link['href'] =~ Nppes.initiate_signature
           end
           raise Exception.new('Initial file not found') unless link
-          proceed(prepare_file(link['href']))
+
+          file_link = URI.parse(Nppes.updates_url).merge(URI.parse(link['href'])).to_s
+          proceed(prepare_file(file_link))
         end
 
         def check_updates

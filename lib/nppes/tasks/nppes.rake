@@ -36,7 +36,7 @@ namespace :nppes do
 
   desc 'Run init base by info'
   task :init_base => :environment do
-    run_env
+    #run_env
     Nppes.background_init
   end
 
