@@ -12,6 +12,8 @@ module Nppes
       end
 
       def proceed_row(row, required_fields = RequiredFields)
+        row = row.encode("utf-8", "ASCII-8BIT", invalid: :replace, undef: :replace, replace: '')
+
         @fields = split_row(row)
 
         # Individual provider
