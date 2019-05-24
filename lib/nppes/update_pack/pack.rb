@@ -84,7 +84,8 @@ module Nppes
             Nppes.logger.warn 'prepare file'
             ret_file = open(file_link)
             file = Tempfile.new(File.basename(file_link))
-            file << ret_file.read.force_encoding('utf-8')
+            #file << ret_file.read.force_encoding('utf-8')
+            file << ret_file.read
             file.flush
             file.path
           end
